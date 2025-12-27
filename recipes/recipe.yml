@@ -3,7 +3,7 @@ name: ambra-os
 description: Sistema con Docker, Supporto Windows, Chrome e Office.
 
 base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 43
+image-version: 41 # <--- ASSICURATI CHE SIA 41
 
 modules:
   - type: files
