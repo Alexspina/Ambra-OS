@@ -1,13 +1,14 @@
-name: Generate Keys
-on: workflow_dispatch # Ti permette di farlo partire a comando
+name: KeyGen
+on: workflow_dispatch
 jobs:
-  generate:
+  keygen:
     runs-on: ubuntu-latest
     steps:
-      - uses: sigstore/cosign-installer@main
+      - uses: sigstore/cosign-installer@v3.3.0
       - run: |
+          # Generiamo le chiavi senza password (fondamentale!)
           cosign generate-key-pair
-          echo "Copia la PRIVATE KEY qui sotto (incluso BEGIN/END):"
+          echo "--- COPIA DA QUI SOTTO (PRIVATE) ---"
           cat cosign.key
-          echo "Copia la PUBLIC KEY qui sotto (incluso BEGIN/END):"
+          echo "--- COPIA DA QUI SOTTO (PUBLIC) ---"
           cat cosign.pub
