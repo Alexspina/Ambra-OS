@@ -28,5 +28,3 @@ modules:
       - org.mozilla.firefox
       - com.usebottles.bottles
       - com.visualstudio.code
-
-  - type: signing
