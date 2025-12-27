@@ -12,19 +12,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate ISO
-        uses: ublue-os/isogenerator@main
-        with:
-          IMAGE_NAME: ambra-os
-          IMAGE_REPO: ghcr.io/alexspina
-          IMAGE_TAG: latest
-          VERSION: 41
-          VARIANT: silverblue
+      - name: Generate ISO via Docker
+        run: |
+          mkdir output
+          docker run --privileged --rm \
+            -v ./output:/build-out \
+            -e FEDORA_MAJOR_VERSION=41 \
+            ghcr.io/ublue-os/isogenerator:latest \
+            IMAGE_URL=ghcr.io/alexspina/ambra-os \
+            IMAGE_TAG=latest \
+            VARIANT=silverblue \
+            ISO_NAME=Ambra-OS.iso
 
       - name: Upload ISO as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Ambra-OS-ISO
-          path: |
-            ./*.iso
-            ./*.sha256
+          path: output/Ambra-OS.iso
