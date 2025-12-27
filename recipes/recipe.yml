@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 name: ambra-os
-description: Sistema immutabile con Docker e supporto Windows per Ambra.
+description: Sistema con Docker, Supporto Windows, Chrome e Office.
 
 base-image: ghcr.io/ublue-os/silverblue-main
 image-version: 39
@@ -13,7 +13,6 @@ modules:
 
   - type: rpm-ostree
     install:
-      - google-chrome-stable
       - micro
       - git
       - fastfetch
@@ -24,9 +23,10 @@ modules:
       - winetricks
 
   - type: default-flatpaks
-    notify: true
-    install:
-      - org.mozilla.firefox
-      - org.libreoffice.LibreOffice
-      - com.usebottles.bottles
-      - com.visualstudio.code
+    configurations:
+      - notify: true
+        install:
+          - org.mozilla.firefox
+          - org.libreoffice.LibreOffice
+          - com.usebottles.bottles
+          - com.visualstudio.code
