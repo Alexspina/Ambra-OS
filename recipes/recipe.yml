@@ -1,30 +1,32 @@
-# Nome della tua creazione
-name: Ambra-OS
-description: Una distro immutabile con Docker e supporto Windows
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: ambra-os
+description: Sistema immutabile con Docker e supporto Windows per Ambra.
 
-# Usiamo Fedora come base (solida e moderna)
-base-image: ghcr.io/ublue-os/base-main
+base-image: ghcr.io/ublue-os/silverblue-main
 image-version: 39
 
 modules:
+  - type: files
+    files:
+      - source: system
+        destination: /
+
   - type: rpm-ostree
     install:
-      # --- STRUMENTI PER I CONTAINER ---
+      - micro
+      - git
+      - fastfetch
       - docker
       - docker-compose
-      - podman # L'alternativa moderna a Docker
-      
-      # --- COMPATIBILITÀ WINDOWS ---
-      - wine-core # Per avviare i file .exe
-      - winetricks # Per installare librerie Windows mancanti
-      
-      # --- UTILITY DI SISTEMA ---
-      - git
-      - fastfetch # Per mostrare il logo della tua distro nel terminale
+      - podman
+      - wine-core
+      - winetricks
 
   - type: default-flatpaks
     notify: true
     install:
-      # Bottles è la migliore interfaccia per gestire app Windows su Linux
+      - org.mozilla.firefox
       - com.usebottles.bottles
-      - com.visualstudio.code # Editor per programmare
+      - com.visualstudio.code
+
+  - type: signing
