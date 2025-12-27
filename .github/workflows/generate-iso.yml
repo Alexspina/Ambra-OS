@@ -17,10 +17,10 @@ jobs:
           mkdir output
           docker run --privileged --rm \
             -v ./output:/build-out \
-            -e FEDORA_MAJOR_VERSION=41 \
             ghcr.io/ublue-os/isogenerator:latest \
             IMAGE_URL=ghcr.io/alexspina/ambra-os \
             IMAGE_TAG=latest \
+            FEDORA_MAJOR_VERSION=41 \
             VARIANT=silverblue \
             ISO_NAME=Ambra-OS.iso
 
