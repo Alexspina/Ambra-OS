@@ -13,6 +13,7 @@ modules:
 
   - type: rpm-ostree
     install:
+      - google-chrome-stable
       - micro
       - git
       - fastfetch
@@ -26,5 +27,6 @@ modules:
     notify: true
     install:
       - org.mozilla.firefox
+      - org.libreoffice.LibreOffice
       - com.usebottles.bottles
       - com.visualstudio.code
