@@ -1,6 +1,6 @@
 name: Generate ISO
 on:
-  workflow_dispatch: # Questo ti permette di farlo partire a mano quando vuoi
+  workflow_dispatch:
 
 jobs:
   build-iso:
@@ -8,7 +8,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,12 +15,11 @@ jobs:
       - name: Generate ISO
         uses: ublue-os/isogenerator@main
         with:
-          image-name: ambra-os
-          image-tag: latest
-          installer-repo: fedora
-          installer-major-version: 41
-          # Qui mettiamo il tuo nome utente GitHub
-          image-vendor: alexspina 
+          IMAGE_NAME: ambra-os
+          IMAGE_REPO: ghcr.io/alexspina
+          IMAGE_TAG: latest
+          VERSION: 41
+          VARIANT: silverblue
 
       - name: Upload ISO as Artifact
         uses: actions/upload-artifact@v4
